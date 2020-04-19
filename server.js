@@ -27,13 +27,6 @@ const database = {
       joined: new Date(),
     },
   ],
-  login: [
-    {
-      id: "987",
-      hash: "",
-      email: "john@ac.com",
-    },
-  ],
 };
 
 app.get("/", (req, res) => {
@@ -45,7 +38,7 @@ app.post("/signin", (req, res) => {
     req.body.email === database.users[0].email &&
     req.body.password === database.users[0].password
   ) {
-    res.json("success");
+    res.json(database.users[0]);
   } else {
     res.status(400).json("error loging in");
   }
@@ -84,7 +77,7 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
-app.post("/image", (req, res) => {
+app.put("/image", (req, res) => {
   const { id } = req.body;
   let found = false;
   database.users.forEach((user) => {
@@ -95,7 +88,7 @@ app.post("/image", (req, res) => {
     }
   });
   if (!found) {
-    res.status(400).json("Not found!");
+    res.status(400).json("Sorry!, Not found!");
   }
 });
 
