@@ -44,7 +44,6 @@ app.get("/allusers", (req, res) => {
   db.select("*")
     .from("users")
     .then((data) => {
-      console.log(data);
       res.json(data);
     })
     .catch((err) => res.status(400).json("Not connect to database"));
